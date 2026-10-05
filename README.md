@@ -13,3 +13,10 @@ Puis, pour lancer le projet :
 ./venv/bin/python3 src/main_analyse.py      
 ./venv/bin/python3 src/main_synthese.py      
 ```
+
+Pour rajouter une dépendance (si besoin) :
+
+```bash
+./venv/bin/python3 -m pip install <nom-du-module>
+./venv/bin/python3 -m pip freeze > requirements.txt
+```
