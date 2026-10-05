@@ -100,18 +100,24 @@ def main():
     # plt.xlabel("Fréquence (Hz)")
     # plt.ylabel("Amplitude")
 
+    # plt.show()
+
     # Récupération des sinusoïdes principales
     sinusoids = find_peak_sinusoids(spectral_signal, fft_freqs, sample_rate)
     print(f"Il y a {len(sinusoids)} sinusoïdes principales.")
 
     # Sauvegarde des sinusoïdes principales dans un fichier numpy .npz
-    save_sinusoids_to_npz(sinusoids, sample_rate)
+    sinusoids_filename = "parameters/sinusoids_lad466.npz"
+    save_sinusoids_to_npz(sinusoids, sample_rate, filename=sinusoids_filename)
+    print(f"Sinusoïdes principales sauvegardées dans {sinusoids_filename}")
 
     # Récupération de l'enveloppe temporelle du signal audio
     envelope = find_temporal_envelope(temporal_signal)
 
     # Sauvegarde de l'enveloppe temporelle dans un fichier numpy .npz
-    np.savez("parameters/envelope.npz", envelope=envelope)
+    envelope_filename = "parameters/envelope.npz"
+    np.savez(envelope_filename, envelope=envelope)
+    print(f"Enveloppe temporelle sauvegardée dans {envelope_filename}")
 
 if __name__ == "__main__":
     main()
