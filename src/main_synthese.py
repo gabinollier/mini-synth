@@ -2,7 +2,7 @@ import os
 import numpy as np
 import scipy.io.wavfile as wav
 
-from sinusoid import Sinusoid, load_sinusoids_from_npz
+from sinusoid import load_sinusoids_from_npz
 
 def main():
     sinusoids, sample_rate = load_sinusoids_from_npz("parameters/sinusoids.npz")

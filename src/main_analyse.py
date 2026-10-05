@@ -79,7 +79,7 @@ def main():
     sample_rate, temporal_signal = wav.read("sounds/note_guitare_lad.wav")
     N = len(temporal_signal)
 
-    # Fenêtrage du signal (uniquement pour la FFT, pas pour l'enveloppe)
+    # Fenêtrage du signal
     windowed_signal = temporal_signal * np.hanning(N)
 
     # Calcul de la transformée de Fourier
