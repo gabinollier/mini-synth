@@ -25,7 +25,7 @@ def main():
     synthetised_signal = synthetiser.synthesize(sequencer.cells)
 
     os.makedirs("sounds/outputs", exist_ok=True)
-    wav.write("sounds/outputs/5ème_synphonie_beethoven.wav", synthetiser.sample_rate, synthetised_signal.astype(np.int16))  
+    wav.write("sounds/outputs/5e_symphonie_beethoven.wav", synthetiser.sample_rate, synthetised_signal.astype(np.int16))
     print(f"Mélodie sauvegardée.")
 
 if __name__ == "__main__":
