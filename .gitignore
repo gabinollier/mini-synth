@@ -219,7 +219,7 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 
-
+figures
 sounds/outputs
 parameters
 peaks
