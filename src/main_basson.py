@@ -5,6 +5,16 @@ import numpy as np
 import scipy.io.wavfile as wav
 
 def computeBandStopFilter(f0, f1, N, fe):
+    """
+    Cette fonction permet de calculer un filtre coupe-bande d'ordre N, dans un intervalle de fréquences donné, à une fréquence d'échantillonnage donnée.
+    L'intervalle est de la forme [f0-f1; f0+f1]
+
+    Paramètres :
+    f0 : fréquence centrale du coupe-bande (en Hz)
+    f1 : moitié de la largeur du coupe-bande (en Hz)
+    N : ordre du coupe-bande
+    fe : fréquence d'échantillonnage (en Hz)
+    """
     w1 = 2*np.pi*f1/fe
     n = np.arange(-N//2, N//2+1)
 
@@ -30,21 +40,35 @@ def computeBandStopFilter(f0, f1, N, fe):
     return h_cb
 
 def show_graphs(f0, f1, N, fe):
+    """
+    Cette fonction permet d'afficher les graphes voulus pour le coupe-bande
+
+    Graphes affichés :
+    - Réponse impulsionnelle
+    - Réponse en fréquence (amplitude et phase)
+    - Amplitude de la réponse à une sinusoïde de 1000 Hz
+
+    Paramètres :
+    f0 : fréquence centrale du coupe-bande (en Hz)
+    f1 : moitié de la largeur du coupe-bande (en Hz)
+    N : ordre du coupe-bande
+    fe : fréquence d'échantillonnage (en Hz)
+    """
     h = computeBandStopFilter(f0, f1, N, fe)
 
     n = np.arange(-N//2, N//2+1)
 
     # Réponse impulsionnelle
     plt.stem(n, h)
-    plt.xlabel("n")
-    plt.ylabel("h[n]")
+    plt.xlabel("Échantillon n")
+    plt.ylabel("Amplitude h[n]")
     plt.title("Réponse impulsionnelle du filtre coupe-bande")
     plt.grid()
     plt.show()
 
     # Réponse en fréquence
     nb_points = 4096
-    H = np.fft.fft(h, nb_points)
+    H = np.fft.fft(np.fft.ifftshift(h), nb_points)
     freqs = np.fft.fftfreq(nb_points, d=1/fe)
 
     plt.plot(freqs[:nb_points//2], np.abs(H)[:nb_points//2])
@@ -61,20 +85,31 @@ def show_graphs(f0, f1, N, fe):
     plt.show()
 
     # Sinusoide de 1000 Hz
-    duration = 2
+    duration = 0.2
     t = np.arange(0, duration, 1/fe)
     sinusoid = np.sin(2*np.pi*f0*t)
 
     response = np.convolve(sinusoid, h, mode="same")
 
     plt.figure()
-    plt.plot(t, sinusoid, label="Sinusoïde en entrée")
+    plt.plot(t, sinusoid, label="Sinusoïde en entrée", color="lightblue")
     plt.plot(t, response, label="Réponse")
+    plt.xlabel("Temps (s)")
+    plt.ylabel("Amplitude du signal")
     plt.legend()
     plt.grid()
     plt.show()
 
 def bassoon_treatment(temporal_signal, fe, h):
+    """
+    Cette fonction permet de filtrer le bruit dans le signal du basson, et d'afficher
+    les spectres (temporels et fréquentiels) avant et après traitement
+
+    Paramètres :
+    temporal_signal : la version temporelle du signal du basson
+    fe : la fréquence d'échantillonnage du signal
+    h : les coefficients du filtre coupe-bande utilisé
+    """
     N = len(temporal_signal)
     t = np.arange(N) / fe
     spectral_signal = np.fft.fft(temporal_signal, N)
