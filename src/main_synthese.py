@@ -50,6 +50,15 @@ def main():
     save_signal("sounds/outputs/5e_symphonie_beethoven.wav", symphonie, sample_rate)
 
 
+    # Création de la mélodie de What I've Done (lue depuis un fichier MIDI)
+    sequencer.clear()
+    sequencer.bpm = 120
+    sequencer.add_notes_from_midi("midi/what_i_ve_done.mid")
+
+    # Synthèse et sauvegarde de What I've Done
+    what_i_ve_done = synthetiser.synthesize(sequencer.cells)
+    save_signal("sounds/outputs/what_i_ve_done.wav", what_i_ve_done, sample_rate)
+
 
     # Création de la mélodie de La Marseillaise (lue depuis un fichier MIDI)
     sequencer.clear()

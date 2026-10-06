@@ -136,7 +136,7 @@ def figure_melodie(t, melodie, debuts, attack_delay):
     plt.close(fig)
 
 
-def figure_reponse_passe_bas(order=884, omega_c=np.pi / 1000):
+def figure_reponse_passe_bas(order=883, omega_c=np.pi / 1000):
     """Trace la réponse en fréquence du filtre passe-bas moyenne mobile d'ordre `order`."""
     from scipy import signal as sig
 
