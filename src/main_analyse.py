@@ -13,7 +13,7 @@ def find_temporal_envelope(temporal_signal):
     (signal redressé et filtré par un filtre passe-bas). 
     """
     
-    order = 884 # Ordre tel que le gain est de -3 dB à une fréquence normalisée de pi/1000, cf rapport.
+    order = 883 # Ordre tel que le gain est de -3 dB à une fréquence normalisée de pi/1000, cf rapport.
     h = np.ones(order) / order  # Réponse impulsionnelle d'un filtre passe-bas RIF et de gain DC = 0 dB
     envelope = np.convolve(np.abs(temporal_signal), h, mode="same")
 
