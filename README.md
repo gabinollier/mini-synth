@@ -11,14 +11,12 @@ Puis, pour lancer le projet :
 
 ```bash
 ./venv/bin/python3 src/main_analyse.py      
-./venv/bin/python3 src/main_synthese.py      
+./venv/bin/python3 src/main_synthese.py    
+./venv/bin/python3 src/main_figures_analyse_synthese.py
+./venv/bin/python3 src/main_basson.py  
 ```
 
 `main_analyse.py` analyse le signal audio et extrait les sinusoïdes principales et l'enveloppe temporelle dans les fichiers `.npz` dans le dossier `parameters`.
 `main_synthese.py` permet de créer des mélodies et les enregistrer dans le dossier `sounds/outputs`.
-
-Eventuellement, pour générer les figures du rapport :
-
-```bash
-./venv/bin/python3 src/main_figures_rapport.py
-```
+`main_figures_analyse_synthese.py` permet d'exporter les graphiques en lien avec l'analyse et la synthèse.
+`main_basson.py` permet de filtrer le signal du basson et d'afficher les graphiques en lien avec ce filtrage.
