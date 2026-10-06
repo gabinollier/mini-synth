@@ -32,6 +32,8 @@ def main():
 
     sequencer = Sequencer()
 
+
+
     # Création de la mélodie de la 5ème symphonie de Beethoven
     sequencer.bpm = 108
     sequencer.add_note(Note.Sol, octave=3, position=0.0)
@@ -47,6 +49,8 @@ def main():
     symphonie = synthetiser.synthesize(sequencer.cells)
     save_signal("sounds/outputs/5e_symphonie_beethoven.wav", symphonie, sample_rate)
 
+
+
     # Création de la mélodie de La Marseillaise (lue depuis un fichier MIDI)
     sequencer.clear()
     sequencer.bpm = 112
@@ -55,6 +59,19 @@ def main():
     # Synthèse et sauvegarde de La Marseillaise
     marseillaise = synthetiser.synthesize(sequencer.cells)
     save_signal("sounds/outputs/marseillaise.wav", marseillaise, sample_rate)
+
+
+
+    # Création de Hotel California (mélodie et accords lus depuis un fichier MIDI) : 
+    sequencer.clear()
+    sequencer.bpm = 85
+    sequencer.add_notes_from_midi("midi/hotel_california.midi", piste=5) # mélodie
+    sequencer.add_notes_from_midi("midi/hotel_california.midi", piste=8) # accords
+    sequencer.add_notes_from_midi("midi/hotel_california.midi", piste=10) # basse
+
+    # Synthèse et sauvegarde de Hotel California
+    hotel_california = synthetiser.synthesize(sequencer.cells)
+    save_signal("sounds/outputs/hotel_california.wav", hotel_california, sample_rate)
 
 
 if __name__ == "__main__":
