@@ -14,9 +14,11 @@ Puis, pour lancer le projet :
 ./venv/bin/python3 src/main_synthese.py      
 ```
 
-Pour rajouter une dépendance (si besoin) :
+`main_analyse.py` analyse le signal audio et extrait les sinusoïdes principales et l'enveloppe temporelle dans les fichiers `.npz` dans le dossier `parameters`.
+`main_synthese.py` permet de créer des mélodies et les enregistrer dans le dossier `sounds/outputs`.
+
+Eventuellement, pour générer les figures du rapport :
 
 ```bash
-./venv/bin/python3 -m pip install <nom-du-module>
-./venv/bin/python3 -m pip freeze > requirements.txt
+./venv/bin/python3 src/main_figures_rapport.py
 ```

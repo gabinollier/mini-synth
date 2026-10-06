@@ -43,13 +43,17 @@ def find_peak_sinusoids(spectral_signal, fft_freqs, sample_rate, amplitude_thres
     max_amp = np.max(np.abs(spectral_signal))
     amplitude_threshold = amplitude_threshold_ratio * max_amp
     most_important_m = []
-    for m in range(N//2):
+    for m in range(1, N//2):
         if np.abs(spectral_signal[m]) > amplitude_threshold:
             most_important_m.append(m)
 
-    # Ensuite on déduplique les raies trop proches
+    # Ensuite on déduplique les raies trop proches.
+    # On ignore également toute raie à moins de `deduping_threshold` de 0 Hz
+    # (composante continue et fuite spectrale 
     deduped_m = []
     for m in sorted(most_important_m, key=lambda m: np.abs(spectral_signal[m]), reverse=True):
+        if abs(fft_freqs[m]) < deduping_threshold:
+            continue
         if not any(abs(fft_freqs[m] - fft_freqs[n]) < deduping_threshold for n in deduped_m):
             deduped_m.append(m)
 
